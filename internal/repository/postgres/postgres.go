@@ -12,7 +12,7 @@ type PostgresRepo struct {
 }
 
 func NewPostgresRepo() *PostgresRepo {
-	return PostgresRepo(initDB)
+	return &PostgresRepo{initDB()}
 }
 
 func initDB() *sql.DB {

@@ -10,8 +10,7 @@ import (
 )
 
 type Cookie interface {
-	SaveJWTInCookie(token string, ctx echo.Context) error
-	GetJWTFromCookie(ctx echo.Context) (string, error)
+	SaveJWTInCookie(ctx echo.Context, userId int) error
 	GetUserIdByCookie(ctx echo.Context) (int, error)
 }
 
@@ -23,8 +22,11 @@ func NewCookie() Cookie {
 	return CookieManager{sessions.NewCookieStore([]byte("key"))}
 }
 
-func (c CookieManager) SaveJWTInCookie(token string, ctx echo.Context) error {
-
+func (c CookieManager) SaveJWTInCookie(ctx echo.Context, userId int) error {
+	token, err := jwt.GenerateJWT(userId)
+	if err != nil {
+		return err
+	}
 	cookie := new(http.Cookie)
 	cookie.Name = "jwt-token"
 	cookie.Value = token
@@ -39,7 +41,7 @@ func (c CookieManager) SaveJWTInCookie(token string, ctx echo.Context) error {
 	return nil
 }
 
-func (c CookieManager) GetJWTFromCookie(ctx echo.Context) (string, error) {
+func (c CookieManager) getJWTFromCookie(ctx echo.Context) (string, error) {
 	Cookie, err := ctx.Cookie("jwt-token")
 	if err != nil {
 		return "", err
@@ -49,7 +51,7 @@ func (c CookieManager) GetJWTFromCookie(ctx echo.Context) (string, error) {
 }
 
 func (c CookieManager) GetUserIdByCookie(ctx echo.Context) (int, error) {
-	token, err := c.GetJWTFromCookie(ctx)
+	token, err := c.getJWTFromCookie(ctx)
 	if err != nil {
 		return -1, err
 	}

@@ -7,5 +7,5 @@ import (
 )
 
 func InitRouters(e *echo.Echo, controller controller.Controller) {
-	e.GET
+	
 }

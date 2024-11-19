@@ -1,20 +1,24 @@
 package service
 
-import "Expense-Tracker-API/internal/repository"
+import (
+	"Expense-Tracker-API/internal/model"
+	"Expense-Tracker-API/internal/repository"
+)
 
 type Service interface {
 	Login(data model.User) error
 	Register(data model.User) error
+	ValidUserData(data model.User) bool
 	GetExpenses(userId int) ([]model.Expense, error)
 	AddExpense(data model.Expense) error
 	UpdateExpense(data model.Expense) error
-	DeleteExpense(expenseId int) error	
+	DeleteExpense(expenseId int) error
 }
 
 type ServiceManager struct {
-	repo *repository.Repository
+	repo repository.Repository
 }
 
-func NewServiceManager(repo *repository.Repository) *ServiceManager {
+func NewServiceManager(repo repository.Repository) *ServiceManager {
 	return &ServiceManager{repo}
 }

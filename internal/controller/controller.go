@@ -2,6 +2,7 @@ package controller
 
 import (
 	"Expense-Tracker-API/internal/service"
+	"Expense-Tracker-API/pkg/cookie"
 
 	"github.com/labstack/echo"
 )
@@ -16,9 +17,10 @@ type Controller interface {
 }
 
 type ControllerManager struct {
-	s *service.Service
+	service service.Service
+	cookie  cookie.Cookie
 }
 
-func NewControllerManager(s *service.Service) *ControllerManager {
-	return &ControllerManager(s)
+func NewControllerManager(s service.Service) *ControllerManager {
+	return &ControllerManager{s, cookie.NewCookie()}
 }

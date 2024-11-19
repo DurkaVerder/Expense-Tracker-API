@@ -9,7 +9,7 @@ type Repository interface {
 
 type UserRepository interface {
 	AddUser(data model.User) error
-	GetUser(userId int) (model.User error)
+	GetUser(userId int) (model.User, error)
 }
 
 type ExpenseRepository interface {
