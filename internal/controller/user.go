@@ -30,10 +30,6 @@ func (c *ControllerManager) HandleRegister(ctx echo.Context) error {
 		return ctx.JSON(400, "Invalid data")
 	}
 
-	if ok := c.service.ValidUserData(enterData); !ok {
-		return ctx.JSON(400, "Invalid data")
-	}
-
 	if err := c.service.Register(enterData); err != nil {
 		return ctx.JSON(500, "Error register user")
 	}
