@@ -11,13 +11,12 @@ type PostgresRepo struct {
 	db *sql.DB
 }
 
-func NewPostgresRepo() *PostgresRepo {
-	return &PostgresRepo{initDB()}
+func NewPostgresRepo(connect string) *PostgresRepo {
+	return &PostgresRepo{initDB(connect)}
 }
 
-func initDB() *sql.DB {
-	open := "user=postgres password=durka dbname=Expense-Tracker sslmode=disable"
-	db, err := sql.Open("postgres", open)
+func initDB(connect string) *sql.DB {
+	db, err := sql.Open("postgres", connect)
 	if err != nil {
 		log.Fatal("Error open db: ", err)
 	}
@@ -27,4 +26,11 @@ func initDB() *sql.DB {
 	}
 
 	return db
+}
+
+func (r *PostgresRepo) CheckConnect() error {
+	if err := r.db.Ping(); err != nil {
+		return err
+	}
+	return nil
 }

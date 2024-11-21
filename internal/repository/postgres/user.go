@@ -10,7 +10,7 @@ func (r *PostgresRepo) GetUser(login string) (model.User, error) {
 	row := r.db.QueryRow(req, login)
 
 	user := model.User{}
-	if err := row.Scan(&user.Id, &user.Login, &user.Name, user.Password); err != nil {
+	if err := row.Scan(&user.Id, &user.Name, &user.Login, &user.Password); err != nil {
 		return user, errors.New("Error scan row")
 	}
 
