@@ -7,7 +7,7 @@ import (
 
 func (s *ServiceManager) Login(data model.User) error {
 	if !s.existUser(data) {
-		return errors.New("User not found or invalid password")
+		return errors.New("Not exist user")
 	}
 
 	return nil
@@ -15,7 +15,7 @@ func (s *ServiceManager) Login(data model.User) error {
 
 func (s *ServiceManager) Register(data model.User) error {
 	if !s.validUserData(data) {
-		return errors.New("invalid data")
+		return errors.New("Invalid data")
 	}
 
 	err := s.repo.AddUser(data)
