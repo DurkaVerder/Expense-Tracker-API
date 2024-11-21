@@ -8,8 +8,8 @@ type Repository interface {
 }
 
 type UserRepository interface {
-	AddUser(data model.User) error
 	GetUser(login string) (model.User, error)
+	AddUser(data model.User) error
 }
 
 type ExpenseRepository interface {
