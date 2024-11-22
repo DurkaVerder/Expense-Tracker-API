@@ -4,20 +4,20 @@ import "time"
 
 type Config struct {
 	DataBase struct {
-		DBName string `yaml:"DBName"`
-		User string `yaml:"user"`
+		User     string `yaml:"user"`
 		Password string `yaml:"password"`
-		Port string `yaml:"port"`
-	}
+		DBName   string `yaml:"DBName"`
+		Port     int    `yaml:"port"`
+	} `yaml:"DataBase"`
 	TestDataBase struct {
-		DBName string `yaml:"DBName"`
-		User string `yaml:"user"`
+		User     string `yaml:"user"`
 		Password string `yaml:"password"`
-		Port string `yaml:"port"`
-	}
+		DBName   string `yaml:"DBName"`
+		Port     int    `yaml:"port"`
+	} `yaml:"TestDataBase"`
 	Server struct {
 		Port string `yaml:"port"`
-	}
+	} `yaml:"Server"`
 }
 
 type User struct {
