@@ -1,0 +1,12 @@
+DataBase:
+  user: postgres
+  password: durka
+  DBName: Expense-Tracker
+  port: 5432
+TestDataBase:
+  user: postgres
+  password: durka
+  DBName: Expense-Tracker-Test
+  port: 5432
+Server:
+  port: ":2222"  
