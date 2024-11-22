@@ -8,7 +8,6 @@ import (
 type Service interface {
 	Login(data model.User) error
 	Register(data model.User) error
-	ValidUserData(data model.User) bool
 	GetExpenses(userId int) ([]model.Expense, error)
 	AddExpense(data model.Expense) error
 	UpdateExpense(data model.Expense) error
